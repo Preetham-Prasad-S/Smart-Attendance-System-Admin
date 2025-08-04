@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../domain/errors/auth_exception.dart';
 import '../../domain/entities/auth_user.dart';
 import '../../domain/repositories/auth_repository.dart';
-import '../datasources/supabase_auth_datasource.dart';
+import '../datasources/auth_remote_datasource_impl.dart';
 import '../models/auth_user_model.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -72,4 +72,5 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 }
 
-final authrepositoryProvider = Provider<AuthRepository>((ref) => AuthRepositoryImpl(),)
+final authrepositoryProvider =
+    Provider<AuthRepository>((ref) => AuthRepositoryImpl());
