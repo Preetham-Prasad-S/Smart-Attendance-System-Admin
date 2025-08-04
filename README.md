@@ -47,24 +47,4 @@ flutter pub get
 flutter run
 ```
 
-🧪 Requirements
-Flutter SDK (latest stable version)
 
-Android Studio or VS Code with Flutter extensions
-
-Physical device or emulator for testing
-
-Supabase project credentials:
-
-SUPABASE_URL
-
-SUPABASE_ANON_KEY
-
-Set these credentials in your .env file or via a secure config method.
-
-lib/
-├── core/ # Constants, utilities, themes, and common widgets
-├── data/ # Repositories and data providers (e.g., Supabase APIs)
-├── domain/ # Business logic, entities, and use cases
-├── presentation/ # UI, screens, hooks, and state management
-└── main.dart # Application entry point
