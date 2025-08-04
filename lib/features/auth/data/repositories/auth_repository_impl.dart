@@ -1,3 +1,5 @@
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 import '../../domain/errors/auth_exception.dart';
 import '../../domain/entities/auth_user.dart';
 import '../../domain/repositories/auth_repository.dart';
@@ -69,3 +71,5 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 }
+
+final authrepositoryProvider = Provider<AuthRepository>((ref) => AuthRepositoryImpl(),)
