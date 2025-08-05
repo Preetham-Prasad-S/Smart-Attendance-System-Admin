@@ -7,4 +7,16 @@ part 'auth_form_controller.g.dart';
 class AuthFormController extends _$AuthFormController {
   @override
   AuthFormState build() => const AuthFormState();
+
+  void setEmail(String value) {
+    state = state.copyWith(email: value);
+  }
+
+  void setPassword(String value) {
+    state = state.copyWith(password: value);
+  }
+
+  void togglePassword() {
+    state = state.copyWith(showPassword: !state.showPassword);
+  }
 }
