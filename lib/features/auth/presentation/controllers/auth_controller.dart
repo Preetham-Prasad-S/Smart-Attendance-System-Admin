@@ -7,9 +7,4 @@ part 'auth_controller.g.dart';
 class AuthController extends _$AuthController {
   @override
   FutureOr<AuthUser?> build() => null;
-
-  Future<void> login(String email, String password) async {
-    final loginUseCase = ref.read(loginUsecaseProvider)
-  }
-
 }

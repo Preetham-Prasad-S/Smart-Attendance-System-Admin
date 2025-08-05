@@ -1,21 +1,12 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../entities/auth_user.dart';
 import '../repositories/auth_repository.dart';
 
-
-class LoginUseCase{
-
+class LoginUseCase {
   final AuthRepository _repository;
 
   LoginUseCase(this._repository);
 
-  Future<AuthUser> call(String email, String password){
+  Future<AuthUser> call(String email, String password) {
     return _repository.login(email: email, password: password);
   }
 }
-
-final loginUseCaseProvider = Provider<LoginUseCase>((ref) {
-  final repository = ref.watch(authRepositoryProvider);
-  return LoginUseCase(repository);
-},)
-

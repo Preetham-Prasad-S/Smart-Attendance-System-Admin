@@ -1,13 +1,11 @@
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-
+import 'package:institute_attendance_system/features/auth/data/datasources/auth_remote_datasource.dart';
 import '../../domain/errors/auth_exception.dart';
 import '../../domain/entities/auth_user.dart';
 import '../../domain/repositories/auth_repository.dart';
-import '../datasources/auth_remote_datasource_impl.dart';
 import '../models/auth_user_model.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final SupabaseAuthDatasource datasource;
+  final AuthRemoteDatasource datasource;
 
   AuthRepositoryImpl(this.datasource);
 
@@ -17,11 +15,11 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final supabaseUser = await datasource.login(email, password);
 
-      if (supabaseUser == null) {
-        throw const AuthException('Login Failed: Invalid Crendentials');
+      if (supabaseUser != null) {
+        return AuthUserModel(id: supabaseUser.id, email: supabaseUser.email)
+            .toEntity();
       }
-      return AuthUserModel(id: supabaseUser.id, email: supabaseUser.email ?? '')
-          .toEntity();
+      throw const AuthException('Login Failed: Invalid Crendentials');
     } on AuthException {
       rethrow;
     } catch (e) {
@@ -35,12 +33,11 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final supabaseUser = await datasource.signUp(email, password);
 
-      if (supabaseUser == null) {
-        throw const AuthException('Sign Up Failed : User creation failed');
+      if (supabaseUser != null) {
+        return AuthUserModel(id: supabaseUser.id, email: supabaseUser.email)
+            .toEntity();
       }
-
-      return AuthUserModel(id: supabaseUser.id, email: supabaseUser.email ?? '')
-          .toEntity();
+      throw const AuthException('Sign Up Failed : User creation failed');
     } on AuthException {
       rethrow;
     } catch (e) {
@@ -64,13 +61,10 @@ class AuthRepositoryImpl implements AuthRepository {
 
       if (supabaseUser == null) return null;
 
-      return AuthUserModel(id: supabaseUser.id, email: supabaseUser.email ?? '')
+      return AuthUserModel(id: supabaseUser.id, email: supabaseUser.email)
           .toEntity();
     } catch (e) {
       throw const AuthException('Failed to get current user.');
     }
   }
 }
-
-final authrepositoryProvider =
-    Provider<AuthRepository>((ref) => AuthRepositoryImpl());
