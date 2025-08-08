@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'auth_user.dart';
+part of 'auth_user_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,51 +13,58 @@ part of 'auth_user.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$AuthUser {
+mixin _$AuthUserModel {
   String get id;
   String get email;
 
-  /// Create a copy of AuthUser
+  /// Create a copy of AuthUserModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $AuthUserCopyWith<AuthUser> get copyWith =>
-      _$AuthUserCopyWithImpl<AuthUser>(this as AuthUser, _$identity);
+  $AuthUserModelCopyWith<AuthUserModel> get copyWith =>
+      _$AuthUserModelCopyWithImpl<AuthUserModel>(
+          this as AuthUserModel, _$identity);
+
+  /// Serializes this AuthUserModel to a JSON map.
+  Map<String, dynamic> toJson();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is AuthUser &&
+            other is AuthUserModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.email, email) || other.email == email));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, email);
 
   @override
   String toString() {
-    return 'AuthUser(id: $id, email: $email)';
+    return 'AuthUserModel(id: $id, email: $email)';
   }
 }
 
 /// @nodoc
-abstract mixin class $AuthUserCopyWith<$Res> {
-  factory $AuthUserCopyWith(AuthUser value, $Res Function(AuthUser) _then) =
-      _$AuthUserCopyWithImpl;
+abstract mixin class $AuthUserModelCopyWith<$Res> {
+  factory $AuthUserModelCopyWith(
+          AuthUserModel value, $Res Function(AuthUserModel) _then) =
+      _$AuthUserModelCopyWithImpl;
   @useResult
   $Res call({String id, String email});
 }
 
 /// @nodoc
-class _$AuthUserCopyWithImpl<$Res> implements $AuthUserCopyWith<$Res> {
-  _$AuthUserCopyWithImpl(this._self, this._then);
+class _$AuthUserModelCopyWithImpl<$Res>
+    implements $AuthUserModelCopyWith<$Res> {
+  _$AuthUserModelCopyWithImpl(this._self, this._then);
 
-  final AuthUser _self;
-  final $Res Function(AuthUser) _then;
+  final AuthUserModel _self;
+  final $Res Function(AuthUserModel) _then;
 
-  /// Create a copy of AuthUser
+  /// Create a copy of AuthUserModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -78,8 +85,8 @@ class _$AuthUserCopyWithImpl<$Res> implements $AuthUserCopyWith<$Res> {
   }
 }
 
-/// Adds pattern-matching-related methods to [AuthUser].
-extension AuthUserPatterns on AuthUser {
+/// Adds pattern-matching-related methods to [AuthUserModel].
+extension AuthUserModelPatterns on AuthUserModel {
   /// A variant of `map` that fallback to returning `orElse`.
   ///
   /// It is equivalent to doing:
@@ -94,12 +101,12 @@ extension AuthUserPatterns on AuthUser {
 
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_AuthUser value)? $default, {
+    TResult Function(_AuthUserModel value)? $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _AuthUser() when $default != null:
+      case _AuthUserModel() when $default != null:
         return $default(_that);
       case _:
         return orElse();
@@ -121,11 +128,11 @@ extension AuthUserPatterns on AuthUser {
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_AuthUser value) $default,
+    TResult Function(_AuthUserModel value) $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _AuthUser():
+      case _AuthUserModel():
         return $default(_that);
       case _:
         throw StateError('Unexpected subclass');
@@ -146,11 +153,11 @@ extension AuthUserPatterns on AuthUser {
 
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_AuthUser value)? $default,
+    TResult? Function(_AuthUserModel value)? $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _AuthUser() when $default != null:
+      case _AuthUserModel() when $default != null:
         return $default(_that);
       case _:
         return null;
@@ -176,7 +183,7 @@ extension AuthUserPatterns on AuthUser {
   }) {
     final _that = this;
     switch (_that) {
-      case _AuthUser() when $default != null:
+      case _AuthUserModel() when $default != null:
         return $default(_that.id, _that.email);
       case _:
         return orElse();
@@ -202,7 +209,7 @@ extension AuthUserPatterns on AuthUser {
   ) {
     final _that = this;
     switch (_that) {
-      case _AuthUser():
+      case _AuthUserModel():
         return $default(_that.id, _that.email);
       case _:
         throw StateError('Unexpected subclass');
@@ -227,7 +234,7 @@ extension AuthUserPatterns on AuthUser {
   ) {
     final _that = this;
     switch (_that) {
-      case _AuthUser() when $default != null:
+      case _AuthUserModel() when $default != null:
         return $default(_that.id, _that.email);
       case _:
         return null;
@@ -236,59 +243,71 @@ extension AuthUserPatterns on AuthUser {
 }
 
 /// @nodoc
-
-class _AuthUser implements AuthUser {
-  const _AuthUser({required this.id, required this.email});
+@JsonSerializable()
+class _AuthUserModel implements AuthUserModel {
+  const _AuthUserModel({required this.id, required this.email});
+  factory _AuthUserModel.fromJson(Map<String, dynamic> json) =>
+      _$AuthUserModelFromJson(json);
 
   @override
   final String id;
   @override
   final String email;
 
-  /// Create a copy of AuthUser
+  /// Create a copy of AuthUserModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$AuthUserCopyWith<_AuthUser> get copyWith =>
-      __$AuthUserCopyWithImpl<_AuthUser>(this, _$identity);
+  _$AuthUserModelCopyWith<_AuthUserModel> get copyWith =>
+      __$AuthUserModelCopyWithImpl<_AuthUserModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$AuthUserModelToJson(
+      this,
+    );
+  }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _AuthUser &&
+            other is _AuthUserModel &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.email, email) || other.email == email));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, email);
 
   @override
   String toString() {
-    return 'AuthUser(id: $id, email: $email)';
+    return 'AuthUserModel(id: $id, email: $email)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$AuthUserCopyWith<$Res>
-    implements $AuthUserCopyWith<$Res> {
-  factory _$AuthUserCopyWith(_AuthUser value, $Res Function(_AuthUser) _then) =
-      __$AuthUserCopyWithImpl;
+abstract mixin class _$AuthUserModelCopyWith<$Res>
+    implements $AuthUserModelCopyWith<$Res> {
+  factory _$AuthUserModelCopyWith(
+          _AuthUserModel value, $Res Function(_AuthUserModel) _then) =
+      __$AuthUserModelCopyWithImpl;
   @override
   @useResult
   $Res call({String id, String email});
 }
 
 /// @nodoc
-class __$AuthUserCopyWithImpl<$Res> implements _$AuthUserCopyWith<$Res> {
-  __$AuthUserCopyWithImpl(this._self, this._then);
+class __$AuthUserModelCopyWithImpl<$Res>
+    implements _$AuthUserModelCopyWith<$Res> {
+  __$AuthUserModelCopyWithImpl(this._self, this._then);
 
-  final _AuthUser _self;
-  final $Res Function(_AuthUser) _then;
+  final _AuthUserModel _self;
+  final $Res Function(_AuthUserModel) _then;
 
-  /// Create a copy of AuthUser
+  /// Create a copy of AuthUserModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -296,7 +315,7 @@ class __$AuthUserCopyWithImpl<$Res> implements _$AuthUserCopyWith<$Res> {
     Object? id = null,
     Object? email = null,
   }) {
-    return _then(_AuthUser(
+    return _then(_AuthUserModel(
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
