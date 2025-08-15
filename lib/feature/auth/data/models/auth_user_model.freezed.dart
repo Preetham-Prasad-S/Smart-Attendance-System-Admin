@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AuthUserModel {
   String get id;
-  String get email;
+  String? get email;
 
   /// Create a copy of AuthUserModel
   /// with the given fields replaced by the non-null parameter values.
@@ -53,7 +53,7 @@ abstract mixin class $AuthUserModelCopyWith<$Res> {
           AuthUserModel value, $Res Function(AuthUserModel) _then) =
       _$AuthUserModelCopyWithImpl;
   @useResult
-  $Res call({String id, String email});
+  $Res call({String id, String? email});
 }
 
 /// @nodoc
@@ -70,17 +70,17 @@ class _$AuthUserModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? email = null,
+    Object? email = freezed,
   }) {
     return _then(_self.copyWith(
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -178,7 +178,7 @@ extension AuthUserModelPatterns on AuthUserModel {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(String id, String email)? $default, {
+    TResult Function(String id, String? email)? $default, {
     required TResult orElse(),
   }) {
     final _that = this;
@@ -205,7 +205,7 @@ extension AuthUserModelPatterns on AuthUserModel {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(String id, String email) $default,
+    TResult Function(String id, String? email) $default,
   ) {
     final _that = this;
     switch (_that) {
@@ -230,7 +230,7 @@ extension AuthUserModelPatterns on AuthUserModel {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(String id, String email)? $default,
+    TResult? Function(String id, String? email)? $default,
   ) {
     final _that = this;
     switch (_that) {
@@ -252,7 +252,7 @@ class _AuthUserModel implements AuthUserModel {
   @override
   final String id;
   @override
-  final String email;
+  final String? email;
 
   /// Create a copy of AuthUserModel
   /// with the given fields replaced by the non-null parameter values.
@@ -296,7 +296,7 @@ abstract mixin class _$AuthUserModelCopyWith<$Res>
       __$AuthUserModelCopyWithImpl;
   @override
   @useResult
-  $Res call({String id, String email});
+  $Res call({String id, String? email});
 }
 
 /// @nodoc
@@ -313,17 +313,17 @@ class __$AuthUserModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
-    Object? email = null,
+    Object? email = freezed,
   }) {
     return _then(_AuthUserModel(
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }

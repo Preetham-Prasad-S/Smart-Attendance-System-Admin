@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AuthUser {
   String get id;
-  String get email;
+  String? get email;
 
   /// Create a copy of AuthUser
   /// with the given fields replaced by the non-null parameter values.
@@ -47,7 +47,7 @@ abstract mixin class $AuthUserCopyWith<$Res> {
   factory $AuthUserCopyWith(AuthUser value, $Res Function(AuthUser) _then) =
       _$AuthUserCopyWithImpl;
   @useResult
-  $Res call({String id, String email});
+  $Res call({String id, String? email});
 }
 
 /// @nodoc
@@ -63,17 +63,17 @@ class _$AuthUserCopyWithImpl<$Res> implements $AuthUserCopyWith<$Res> {
   @override
   $Res call({
     Object? id = null,
-    Object? email = null,
+    Object? email = freezed,
   }) {
     return _then(_self.copyWith(
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -171,7 +171,7 @@ extension AuthUserPatterns on AuthUser {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(String id, String email)? $default, {
+    TResult Function(String id, String? email)? $default, {
     required TResult orElse(),
   }) {
     final _that = this;
@@ -198,7 +198,7 @@ extension AuthUserPatterns on AuthUser {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(String id, String email) $default,
+    TResult Function(String id, String? email) $default,
   ) {
     final _that = this;
     switch (_that) {
@@ -223,7 +223,7 @@ extension AuthUserPatterns on AuthUser {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(String id, String email)? $default,
+    TResult? Function(String id, String? email)? $default,
   ) {
     final _that = this;
     switch (_that) {
@@ -243,7 +243,7 @@ class _AuthUser implements AuthUser {
   @override
   final String id;
   @override
-  final String email;
+  final String? email;
 
   /// Create a copy of AuthUser
   /// with the given fields replaced by the non-null parameter values.
@@ -278,7 +278,7 @@ abstract mixin class _$AuthUserCopyWith<$Res>
       __$AuthUserCopyWithImpl;
   @override
   @useResult
-  $Res call({String id, String email});
+  $Res call({String id, String? email});
 }
 
 /// @nodoc
@@ -294,17 +294,17 @@ class __$AuthUserCopyWithImpl<$Res> implements _$AuthUserCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   $Res call({
     Object? id = null,
-    Object? email = null,
+    Object? email = freezed,
   }) {
     return _then(_AuthUser(
       id: null == id
           ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _self.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }

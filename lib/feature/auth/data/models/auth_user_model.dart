@@ -7,7 +7,7 @@ part 'auth_user_model.g.dart';
 abstract class AuthUserModel with _$AuthUserModel {
   const factory AuthUserModel({
     required String id,
-    required String email,
+    required String? email,
   }) = _AuthUserModel;
 
   factory AuthUserModel.fromJson(Map<String, dynamic> json) =>
