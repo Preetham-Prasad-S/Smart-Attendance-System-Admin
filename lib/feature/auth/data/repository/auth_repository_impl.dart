@@ -2,12 +2,12 @@ import 'package:fpdart/src/either.dart';
 import 'package:institute_attendance_system/feature/auth/core/exceptions/failure.dart';
 import 'package:institute_attendance_system/feature/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:institute_attendance_system/feature/auth/domain/entities/auth_user.dart';
-import 'package:institute_attendance_system/feature/auth/domain/repository/auth_remote_repository.dart';
+import 'package:institute_attendance_system/feature/auth/domain/repository/auth_repository.dart';
 
-class AuthRemoteRepositoryImpl implements AuthRepository {
+class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDatasource _remoteDatasource;
 
-  const AuthRemoteRepositoryImpl(this._remoteDatasource);
+  const AuthRepositoryImpl(this._remoteDatasource);
 
   @override
   Future<Either<Failure, AuthUser>> signup(
@@ -17,13 +17,11 @@ class AuthRemoteRepositoryImpl implements AuthRepository {
           await _remoteDatasource.signup(email: email, password: password);
 
       if (response != null) {
-        print(right(AuthUser(id: response.id, email: response.email)));
         return right(AuthUser(id: response.id, email: response.email));
       }
 
       return left(Failure(message: "Sign Up Failed"));
     } catch (e) {
-      print(Failure(message: e.toString()));
       return left(Failure(message: e.toString()));
     }
   }
@@ -39,20 +37,33 @@ class AuthRemoteRepositoryImpl implements AuthRepository {
         return right(AuthUser(id: response.id, email: response.email));
       }
 
-      return left(Failure(message: "Sign Up Failed"));
+      return left(Failure(message: "Login Failed"));
     } catch (e) {
       return left(Failure(message: e.toString()));
     }
   }
 
   @override
-  Future<void> logout() {
-    try {} catch (e) {}
+  Future<Either<Failure, void>> logout() async {
+    try {
+      await _remoteDatasource.logout();
+      return right(null);
+    } catch (e) {
+      return left(Failure(message: e.toString()));
+    }
   }
 
   @override
-  Future<void> getCurrentUser() {
-    // TODO: implement getCurrentUser
-    throw UnimplementedError();
+  Future<Either<Failure, AuthUser>> getCurrentUser() async {
+    try {
+      final user = await _remoteDatasource.getCurrentUser();
+
+      if (user != null) {
+        return right(AuthUser(id: user.id, email: user.email));
+      }
+      return left(Failure(message: "Can't get current user"));
+    } catch (e) {
+      return left(Failure(message: e.toString()));
+    }
   }
 }

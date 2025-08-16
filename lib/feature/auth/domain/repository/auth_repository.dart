@@ -8,6 +8,6 @@ abstract class AuthRepository {
       {required String email, required String password});
   Future<Either<Failure, AuthUser>> signup(
       {required String email, required String password});
-  Future<void> logout();
-  Future<void> getCurrentUser();
+  Future<Either<Failure, void>> logout();
+  Future<Either<Failure, AuthUser>> getCurrentUser();
 }
