@@ -1,8 +1,8 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:institute_attendance_system/feature/auth/core/exceptions/failure.dart';
-import 'package:institute_attendance_system/feature/auth/core/usecases/usecase.dart';
-import 'package:institute_attendance_system/feature/auth/domain/entities/auth_user.dart';
-import 'package:institute_attendance_system/feature/auth/domain/repository/auth_repository.dart';
+import '../../../auth/core/exceptions/failure.dart';
+import '../../../auth/core/usecases/usecase.dart';
+import '../../../auth/domain/entities/auth_user.dart';
+import '../../../auth/domain/repository/auth_repository.dart';
 
 class GetCurrentUserUsecase
     implements Usecase<Either<Failure, AuthUserEntity>, NoParams> {

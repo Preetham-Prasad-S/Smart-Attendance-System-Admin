@@ -1,10 +1,6 @@
-import 'package:fpdart/fpdart.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:institute_attendance_system/feature/auth/core/exceptions/failure.dart';
-import 'package:institute_attendance_system/feature/auth/domain/entities/auth_user.dart';
 import 'package:institute_attendance_system/feature/auth/presentation/controllers/auth_controller.dart';
 import 'package:institute_attendance_system/feature/auth/presentation/controllers/authstates/auth_state.dart';
-import '../../../auth/core/usecases/usecase.dart';
 import '../../../auth/data/datasources/auth_remote_datasource.dart';
 import '../../../auth/data/datasources/auth_remote_datasource_impl.dart';
 import '../../../auth/data/repository/auth_repository_impl.dart';
@@ -39,7 +35,7 @@ final signupUsecaseProvider = Provider<SignUpUsecase>(
 final logoutUsecaseProvider = Provider<LogoutUsecase>(
     (ref) => LogoutUsecase(ref.read(authRepositoryProvider)));
 
-final getCurrentUserUsecaseProvider = Provider<Usecase>(
+final getCurrentUserUsecaseProvider = Provider<GetCurrentUserUsecase>(
   (ref) => GetCurrentUserUsecase(ref.read(authRepositoryProvider)),
 );
 
@@ -48,6 +44,7 @@ final authControllerProvider =
   final login = ref.watch(loginUsecaseProvider);
   final signup = ref.watch(signupUsecaseProvider);
   final logout = ref.watch(logoutUsecaseProvider);
+  final getCurrentUser = ref.watch(getCurrentUserUsecaseProvider);
 
-  return AuthController(login, logout, signup);
+  return AuthController(login, logout, signup, getCurrentUser);
 });
