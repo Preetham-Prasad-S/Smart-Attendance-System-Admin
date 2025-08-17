@@ -4,10 +4,10 @@ import 'package:institute_attendance_system/feature/auth/domain/entities/auth_us
 
 abstract class AuthRepository {
   const AuthRepository();
-  Future<Either<Failure, AuthUser>> login(
+  Future<Either<Failure, AuthUserEntity>> login(
       {required String email, required String password});
-  Future<Either<Failure, AuthUser>> signup(
+  Future<Either<Failure, AuthUserEntity>> signup(
       {required String email, required String password});
   Future<Either<Failure, void>> logout();
-  Future<Either<Failure, AuthUser>> getCurrentUser();
+  Future<Either<Failure, AuthUserEntity>> getCurrentUser();
 }

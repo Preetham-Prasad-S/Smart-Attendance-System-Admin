@@ -5,13 +5,13 @@ import 'package:institute_attendance_system/feature/auth/domain/entities/auth_us
 import 'package:institute_attendance_system/feature/auth/domain/repository/auth_repository.dart';
 
 class GetCurrentUserUsecase
-    implements Usecase<Either<Failure, AuthUser>, NoParams> {
+    implements Usecase<Either<Failure, AuthUserEntity>, NoParams> {
   final AuthRepository _repository;
 
   GetCurrentUserUsecase(this._repository);
 
   @override
-  Future<Either<Failure, AuthUser>> call(NoParams params) async {
+  Future<Either<Failure, AuthUserEntity>> call(NoParams params) async {
     return await _repository.getCurrentUser();
   }
 }

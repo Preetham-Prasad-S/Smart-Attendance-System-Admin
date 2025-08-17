@@ -10,13 +10,13 @@ class LoginParams {
   const LoginParams(this.email, this.password);
 }
 
-class LoginUsecase implements Usecase<Either<Failure, AuthUser>, LoginParams> {
+class LoginUsecase implements Usecase<Either<Failure, AuthUserEntity>, LoginParams> {
   final AuthRepository _repository;
 
   const LoginUsecase(this._repository);
 
   @override
-  Future<Either<Failure, AuthUser>> call(LoginParams params) async {
+  Future<Either<Failure, AuthUserEntity>> call(LoginParams params) async {
     return await _repository.login(
         email: params.email, password: params.password);
   }

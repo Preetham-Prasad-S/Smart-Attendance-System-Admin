@@ -11,13 +11,13 @@ class SignUpParams {
 }
 
 class SignUpUsecase
-    implements Usecase<Either<Failure, AuthUser>, SignUpParams> {
+    implements Usecase<Either<Failure, AuthUserEntity>, SignUpParams> {
   final AuthRepository _repository;
 
   const SignUpUsecase(this._repository);
 
   @override
-  Future<Either<Failure, AuthUser>> call(SignUpParams params) async {
+  Future<Either<Failure, AuthUserEntity>> call(SignUpParams params) async {
     return await _repository.signup(
         email: params.email, password: params.password);
   }

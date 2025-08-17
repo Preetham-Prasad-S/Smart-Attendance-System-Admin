@@ -10,14 +10,14 @@ class AuthRepositoryImpl implements AuthRepository {
   const AuthRepositoryImpl(this._remoteDatasource);
 
   @override
-  Future<Either<Failure, AuthUser>> signup(
+  Future<Either<Failure, AuthUserEntity>> signup(
       {required String email, required String password}) async {
     try {
       final response =
           await _remoteDatasource.signup(email: email, password: password);
 
       if (response != null) {
-        return right(AuthUser(id: response.id, email: response.email));
+        return right(AuthUserEntity(id: response.id, email: response.email));
       }
 
       return left(Failure(message: "Sign Up Failed"));
@@ -27,14 +27,14 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, AuthUser>> login(
+  Future<Either<Failure, AuthUserEntity>> login(
       {required String email, required String password}) async {
     try {
       final response =
           await _remoteDatasource.login(email: email, password: password);
 
       if (response != null) {
-        return right(AuthUser(id: response.id, email: response.email));
+        return right(AuthUserEntity(id: response.id, email: response.email));
       }
 
       return left(Failure(message: "Login Failed"));
@@ -54,12 +54,12 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, AuthUser>> getCurrentUser() async {
+  Future<Either<Failure, AuthUserEntity>> getCurrentUser() async {
     try {
       final user = await _remoteDatasource.getCurrentUser();
 
       if (user != null) {
-        return right(AuthUser(id: user.id, email: user.email));
+        return right(AuthUserEntity(id: user.id, email: user.email));
       }
       return left(Failure(message: "Can't get current user"));
     } catch (e) {
