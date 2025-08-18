@@ -4,7 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:institute_attendance_system/feature/auth/presentation/pages/sign_up_screen.dart';
-import '../../../auth/presentation/pages/home_screen.dart';
+import 'package:institute_attendance_system/feature/home/presentation/pages/home_screen.dart';
 import '../../../auth/presentation/widgets/auth_button_widget.dart';
 import '../../../auth/presentation/controllers/authstates/auth_state.dart';
 import '../../../auth/presentation/providers/providers.dart';

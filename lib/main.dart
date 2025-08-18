@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:institute_attendance_system/feature/auth/core/themes/app_theme.dart';
+import 'package:institute_attendance_system/feature/auth/presentation/pages/login_screen.dart';
 import 'package:institute_attendance_system/feature/auth/presentation/pages/sign_up_screen.dart';
+import 'package:institute_attendance_system/feature/home/presentation/pages/home_screen.dart';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       title: "Smart Attendance System (Admin)",
       debugShowCheckedModeBanner: false,
-      home: SignUpScreen(),
+      home: HomeScreen(),
     );
   }
 }

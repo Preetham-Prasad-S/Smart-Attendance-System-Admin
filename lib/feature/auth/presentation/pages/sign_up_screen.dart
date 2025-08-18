@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../auth/presentation/pages/home_screen.dart';
+import 'package:institute_attendance_system/feature/home/presentation/pages/home_screen.dart';
 import '../../../auth/presentation/pages/login_screen.dart';
 import '../../../auth/presentation/widgets/auth_button_widget.dart';
 import '../../../auth/presentation/controllers/authstates/auth_state.dart';
@@ -165,33 +165,38 @@ class SignUpScreen extends HookConsumerWidget {
                                         buttonText: "Sign Up",
                                       ),
                                       SizedBox(height: 30),
-                                      RichText(
-                                          text: TextSpan(
-                                              style: GoogleFonts.quicksand(
-                                                  color: const Color.fromARGB(
-                                                      255, 90, 136, 206),
-                                                  fontWeight: FontWeight.w500),
-                                              text:
-                                                  "Already a JITIAN go ahead with ",
-                                              children: [
-                                            TextSpan(
-                                                text: "Login",
-                                                recognizer:
-                                                    TapGestureRecognizer()
-                                                      ..onTap = () => Navigator
-                                                          .pushReplacement(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        LoginScreen(),
-                                                              )),
-                                                style: TextStyle(
-                                                    color: Colors.blue.shade900,
-                                                    fontWeight: FontWeight.bold,
-                                                    decoration: TextDecoration
-                                                        .underline))
-                                          ]))
+                                      Flexible(
+                                        child: RichText(
+                                            text: TextSpan(
+                                                style: GoogleFonts.quicksand(
+                                                    color: const Color.fromARGB(
+                                                        255, 90, 136, 206),
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                                text:
+                                                    "Already a JITIAN go ahead with ",
+                                                children: [
+                                              TextSpan(
+                                                  text: "Login",
+                                                  recognizer:
+                                                      TapGestureRecognizer()
+                                                        ..onTap = () => Navigator
+                                                            .pushReplacement(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          LoginScreen(),
+                                                                )),
+                                                  style: TextStyle(
+                                                      color:
+                                                          Colors.blue.shade900,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      decoration: TextDecoration
+                                                          .underline))
+                                            ])),
+                                      )
                                     ],
                                   ),
                                 ),
