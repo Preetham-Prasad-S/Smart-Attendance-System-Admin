@@ -1,0 +1,2 @@
+D:/Flutter Projects/Smart Attendance System/Smart-Attendance-System-Admin/android/app/.cxx/Debug/115p6z4y/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/Flutter Projects/Smart Attendance System/Smart-Attendance-System-Admin/android/app/.cxx/Debug/115p6z4y/armeabi-v7a/CMakeFiles/rebuild_cache.dir

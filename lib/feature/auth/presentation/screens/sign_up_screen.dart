@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:institute_attendance_system/feature/auth/presentation/pages/sign_up_screen.dart';
 import 'package:institute_attendance_system/feature/home/presentation/pages/home_screen.dart';
-import '../../../auth/presentation/widgets/auth_button_widget.dart';
-import '../../../auth/presentation/controllers/authstates/auth_state.dart';
-import '../../../auth/presentation/providers/providers.dart';
-import '../../../auth/presentation/widgets/auth_header_widget.dart';
-import '../../../auth/presentation/widgets/auth_text_field_widget.dart';
+import 'login_screen.dart';
+import '../widgets/auth_button_widget.dart';
+import '../controllers/authstates/auth_state.dart';
+import '../../dependency_injection.dart';
+import '../widgets/auth_header_widget.dart';
+import '../widgets/auth_text_field_widget.dart';
 
-class LoginScreen extends HookConsumerWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends HookConsumerWidget {
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,10 +20,12 @@ class LoginScreen extends HookConsumerWidget {
 
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
+    final confirmPasswordController = useTextEditingController();
     final authState = ref.watch(authControllerProvider);
     final authController = ref.read(authControllerProvider.notifier);
 
     final passwordVisibility = useState(true);
+    final confirmPasswordVisibility = useState(true);
 
     ref.listen<AuthUserState>(
       authControllerProvider,
@@ -74,7 +76,7 @@ class LoginScreen extends HookConsumerWidget {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       const Text(
-                                        "Welcome Back To SASJIT",
+                                        "Welcome to SASJIT",
                                         style: TextStyle(
                                           fontSize: 24,
                                           fontWeight: FontWeight.bold,
@@ -120,11 +122,38 @@ class LoginScreen extends HookConsumerWidget {
                                           label: "Password",
                                           controller: passwordController),
                                       const SizedBox(height: 30),
+
+                                      // Confirm Password Text Input
+                                      AuthTextFieldWidget(
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return "Please Confirm The Password";
+                                            } else if (!value.isEmpty &&
+                                                passwordController.text !=
+                                                    confirmPasswordController
+                                                        .text) {
+                                              return "Passwords do not match";
+                                            }
+                                            return null;
+                                          },
+                                          isPassword: true,
+                                          obscureText:
+                                              confirmPasswordVisibility.value,
+                                          onToggle: () =>
+                                              confirmPasswordVisibility.value =
+                                                  !confirmPasswordVisibility
+                                                      .value,
+                                          icon: Icons.password,
+                                          label: "Confirm Password",
+                                          controller:
+                                              confirmPasswordController),
+                                      const SizedBox(height: 30),
                                       AuthButtonWidget(
                                         onPressed: () {
                                           if (formKey.currentState!
                                               .validate()) {
-                                            authController.login(
+                                            authController.signup(
                                                 emailController.text.trim(),
                                                 passwordController.text.trim());
                                           }
@@ -133,35 +162,41 @@ class LoginScreen extends HookConsumerWidget {
                                           loading: () => true,
                                           orElse: () => false,
                                         ),
-                                        buttonText: "Login",
+                                        buttonText: "Sign Up",
                                       ),
                                       SizedBox(height: 30),
-                                      RichText(
-                                          text: TextSpan(
-                                              style: GoogleFonts.quicksand(
-                                                  color: const Color.fromARGB(
-                                                      255, 90, 136, 206),
-                                                  fontWeight: FontWeight.w500),
-                                              text: "Not a JITIAN ",
-                                              children: [
-                                            TextSpan(
-                                                text: "Sign Up",
-                                                recognizer:
-                                                    TapGestureRecognizer()
-                                                      ..onTap = () => Navigator
-                                                          .pushReplacement(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        SignUpScreen(),
-                                                              )),
-                                                style: TextStyle(
-                                                    color: Colors.blue.shade900,
-                                                    fontWeight: FontWeight.bold,
-                                                    decoration: TextDecoration
-                                                        .underline))
-                                          ]))
+                                      Flexible(
+                                        child: RichText(
+                                            text: TextSpan(
+                                                style: GoogleFonts.quicksand(
+                                                    color: const Color.fromARGB(
+                                                        255, 90, 136, 206),
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                                text:
+                                                    "Already a JITIAN go ahead with ",
+                                                children: [
+                                              TextSpan(
+                                                  text: "Login",
+                                                  recognizer:
+                                                      TapGestureRecognizer()
+                                                        ..onTap = () => Navigator
+                                                            .pushReplacement(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          LoginScreen(),
+                                                                )),
+                                                  style: TextStyle(
+                                                      color:
+                                                          Colors.blue.shade900,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      decoration: TextDecoration
+                                                          .underline))
+                                            ])),
+                                      )
                                     ],
                                   ),
                                 ),
