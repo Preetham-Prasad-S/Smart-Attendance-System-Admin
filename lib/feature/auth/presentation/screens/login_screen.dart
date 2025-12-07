@@ -26,9 +26,14 @@ class LoginScreen extends StatelessWidget {
               elevation: 100,
               shadowColor: Colors.black45,
               child: LayoutBuilder(builder: (context, constraints) {
+                final width = constraints.maxWidth > 1200
+                    ? constraints.maxWidth / 
+                    : constraints.maxWidth / 1.2;
+                final height = constraints.maxHeight;
+
                 return SizedBox(
-                  width: 450,
-                  height: 550,
+                  width: width * 0.6,
+                  height: height * 0.6,
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
@@ -46,6 +51,7 @@ class LoginScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
                           child: Column(
                             children: [
+                              SizedBox(height: height * 0.03),
                               Card(
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15)),
@@ -57,11 +63,12 @@ class LoginScreen extends StatelessWidget {
                                   child: Icon(Icons.login),
                                 ),
                               ),
-                              SizedBox(height: 45),
+                              SizedBox(height: height * 0.015),
                               Text(
                                 "Sign Up With Email",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.w900, fontSize: 25),
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: width * 0.03),
                               ),
                               Text(
                                 textAlign: TextAlign.center,
@@ -69,39 +76,48 @@ class LoginScreen extends StatelessWidget {
                                 style: GoogleFonts.quicksand(
                                     fontWeight: FontWeight.w500),
                               ),
-                              SizedBox(height: 20),
+                              SizedBox(height: height * 0.02),
                               TextFormField(
                                 decoration: InputDecoration(
-                                    constraints: BoxConstraints(maxHeight: 40),
-                                    border: OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.blue),
-                                        borderRadius:
-                                            BorderRadius.circular(20))),
-                              ),
-                              SizedBox(height: 10),
-                              TextFormField(
-                                decoration: InputDecoration(
-                                    constraints: BoxConstraints(maxHeight: 40),
+                                    filled: true,
+                                    fillColor: const Color.fromARGB(
+                                        172, 205, 219, 228),
+                                    constraints: BoxConstraints(
+                                        maxHeight: height * 0.045),
                                     enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(),
+                                        borderSide: BorderSide(
+                                            color: Colors.transparent),
                                         borderRadius:
-                                            BorderRadius.circular(20))),
+                                            BorderRadius.circular(10))),
+                              ),
+                              SizedBox(height: height * 0.025),
+                              TextFormField(
+                                decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: const Color.fromARGB(
+                                        172, 205, 219, 228),
+                                    constraints: BoxConstraints(
+                                        maxHeight: height * 0.045),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.transparent),
+                                        borderRadius:
+                                            BorderRadius.circular(10))),
                               ),
                               SizedBox(
-                                height: 10,
+                                height: height * 0.025,
                               ),
                               Align(
                                   alignment: Alignment.centerRight,
                                   child: Text("Forgot Password")),
                               SizedBox(
-                                height: 10,
+                                height: height * 0.02,
                               ),
                               TextButton(
                                 style: TextButton.styleFrom(
                                     textStyle: GoogleFonts.quicksand(
                                         fontWeight: FontWeight.w600,
-                                        fontSize: 17),
+                                        fontSize: width * 0.03),
                                     foregroundColor: Colors.white,
                                     minimumSize: Size(double.infinity, 50),
                                     backgroundColor: Colors.black),
