@@ -26,14 +26,12 @@ class LoginScreen extends StatelessWidget {
               elevation: 100,
               shadowColor: Colors.black45,
               child: LayoutBuilder(builder: (context, constraints) {
-                final width = constraints.maxWidth > 1200
-                    ? constraints.maxWidth / 
-                    : constraints.maxWidth / 1.2;
+                final width = constraints.maxWidth;
                 final height = constraints.maxHeight;
 
                 return SizedBox(
-                  width: width * 0.6,
-                  height: height * 0.6,
+                  width: 500,
+                  height: 500,
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
@@ -67,8 +65,7 @@ class LoginScreen extends StatelessWidget {
                               Text(
                                 "Sign Up With Email",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: width * 0.03),
+                                    fontWeight: FontWeight.w900, fontSize: 20),
                               ),
                               Text(
                                 textAlign: TextAlign.center,
@@ -82,8 +79,7 @@ class LoginScreen extends StatelessWidget {
                                     filled: true,
                                     fillColor: const Color.fromARGB(
                                         172, 205, 219, 228),
-                                    constraints: BoxConstraints(
-                                        maxHeight: height * 0.045),
+                                    constraints: BoxConstraints(maxHeight: 40),
                                     enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                             color: Colors.transparent),
@@ -96,8 +92,7 @@ class LoginScreen extends StatelessWidget {
                                     filled: true,
                                     fillColor: const Color.fromARGB(
                                         172, 205, 219, 228),
-                                    constraints: BoxConstraints(
-                                        maxHeight: height * 0.045),
+                                    constraints: BoxConstraints(maxHeight: 40),
                                     enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
                                             color: Colors.transparent),
@@ -105,19 +100,19 @@ class LoginScreen extends StatelessWidget {
                                             BorderRadius.circular(10))),
                               ),
                               SizedBox(
-                                height: height * 0.025,
+                                height: height * 0.012,
                               ),
                               Align(
                                   alignment: Alignment.centerRight,
                                   child: Text("Forgot Password")),
                               SizedBox(
-                                height: height * 0.02,
+                                height: height * 0.012,
                               ),
                               TextButton(
                                 style: TextButton.styleFrom(
                                     textStyle: GoogleFonts.quicksand(
                                         fontWeight: FontWeight.w600,
-                                        fontSize: width * 0.03),
+                                        fontSize: 20),
                                     foregroundColor: Colors.white,
                                     minimumSize: Size(double.infinity, 50),
                                     backgroundColor: Colors.black),
@@ -127,7 +122,7 @@ class LoginScreen extends StatelessWidget {
                               SizedBox(
                                 height: 10,
                               ),
-                              Text("Or do you have an account sign up"),
+                              Text("Or do you have an account Sign up"),
                               SizedBox(
                                 height: 25,
                               ),
@@ -139,9 +134,11 @@ class LoginScreen extends StatelessWidget {
                                   ElevatedButton(
                                       style: IconButton.styleFrom(
                                         fixedSize: Size(120, 50),
-                                        elevation: 0,
+                                        elevation: 10,
+                                        shadowColor: Colors.black26,
                                         foregroundColor: Colors.black,
-                                        backgroundColor: Colors.white,
+                                        backgroundColor: const Color.fromARGB(
+                                            255, 255, 255, 255),
                                       ),
                                       onPressed: () {},
                                       child: Icon(
@@ -151,7 +148,8 @@ class LoginScreen extends StatelessWidget {
                                   ElevatedButton(
                                       style: IconButton.styleFrom(
                                         fixedSize: Size(120, 50),
-                                        elevation: 0,
+                                        elevation: 10,
+                                        shadowColor: Colors.black26,
                                         foregroundColor: Colors.black,
                                         backgroundColor: Colors.white,
                                       ),
@@ -163,7 +161,8 @@ class LoginScreen extends StatelessWidget {
                                   ElevatedButton(
                                       style: IconButton.styleFrom(
                                         fixedSize: Size(120, 50),
-                                        elevation: 0,
+                                        elevation: 10,
+                                        shadowColor: Colors.black26,
                                         foregroundColor: Colors.black,
                                         backgroundColor: Colors.white,
                                       ),
