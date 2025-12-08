@@ -1,12 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:institute_attendance_system/feature/auth/dependency_injection.dart';
+import 'package:institute_attendance_system/feature/auth/presentation/screens/sign_up_screen.dart';
 import 'package:ionicons/ionicons.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
+  ConsumerState<LoginScreen> createState() => _LoginScreenConsumerState();
+}
+
+class _LoginScreenConsumerState extends ConsumerState<LoginScreen> {
+  late final TextEditingController emailController;
+  late final TextEditingController passwordController;
+
+  @override
+  void initState() {
+    super.initState();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final authState = ref.watch(authControllerProvider);
+    final authController = ref.read(authControllerProvider.notifier);
+
     return DecoratedBox(
         decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -27,12 +55,11 @@ class LoginScreen extends StatelessWidget {
               shadowColor: Colors.black45,
               child: LayoutBuilder(builder: (context, constraints) {
                 final width = constraints.maxWidth;
-                final width = constraints.maxWidth;
                 final height = constraints.maxHeight;
 
                 return SizedBox(
-                  width: 450,
-                  height: 500,
+                  width: 500,
+                  height: 550,
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
@@ -76,12 +103,14 @@ class LoginScreen extends StatelessWidget {
                               ),
                               SizedBox(height: height * 0.02),
                               CustomTextField(
+                                controller: emailController,
                                 prefixIcon: Ionicons.person_outline,
                                 height: height,
                                 hintText: "Enter Email",
                               ),
                               SizedBox(height: height * 0.025),
                               CustomTextField(
+                                controller: passwordController,
                                 prefixIcon: Ionicons.lock_closed_outline,
                                 height: height,
                                 hintText: "Enter Password",
@@ -91,25 +120,58 @@ class LoginScreen extends StatelessWidget {
                               ),
                               Align(
                                   alignment: Alignment.centerRight,
-                                  child: Text("Forgot Password")),
+                                  child: GestureDetector(
+                                    onTap: () => Navigator.of(context)
+                                        .pushReplacement(MaterialPageRoute(
+                                      builder: (context) => SignUpScreen(),
+                                    )),
+                                    child: Text(
+                                      "Forgot Password",
+                                      style: GoogleFonts.quicksand(
+                                          decoration: TextDecoration.underline),
+                                    ),
+                                  )),
                               SizedBox(
                                 height: height * 0.012,
                               ),
                               TextButton(
                                 style: TextButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
                                     textStyle: GoogleFonts.quicksand(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 20),
                                     foregroundColor: Colors.white,
                                     minimumSize: Size(double.infinity, 50),
                                     backgroundColor: Colors.black),
-                                onPressed: () {},
+                                onPressed: () => authController.login(
+                                    emailController.text.trim(),
+                                    passwordController.text.trim()),
                                 child: Text("Get Started"),
                               ),
                               SizedBox(
                                 height: 10,
                               ),
-                              Text("Or do you have an account Sign up"),
+                              GestureDetector(
+                                onTap: () => Navigator.of(context)
+                                    .pushReplacement(MaterialPageRoute(
+                                  builder: (context) => SignUpScreen(),
+                                )),
+                                child: RichText(
+                                  text: TextSpan(
+                                      style: GoogleFonts.quicksand(),
+                                      text: "Or do you have an account ",
+                                      children: [
+                                        TextSpan(
+                                            text: "Sign Up",
+                                            style: GoogleFonts.quicksand(
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                fontWeight: FontWeight.w500))
+                                      ]),
+                                ),
+                              ),
                               SizedBox(
                                 height: 25,
                               ),
@@ -177,17 +239,26 @@ class LoginScreen extends StatelessWidget {
 class CustomTextField extends StatelessWidget {
   final IconData prefixIcon;
   final String hintText;
+  final TextEditingController controller;
   const CustomTextField(
       {super.key,
       required this.height,
       required this.hintText,
-      required this.prefixIcon});
+      required this.prefixIcon,
+      required this.controller});
 
   final double height;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
+      validator: (value) {
+        if (value != null && !value.isEmpty) {
+          return "";
+        }
+        return "Please $hintText";
+      },
       cursorRadius: Radius.circular(50),
       cursorHeight: 18,
       decoration: InputDecoration(
