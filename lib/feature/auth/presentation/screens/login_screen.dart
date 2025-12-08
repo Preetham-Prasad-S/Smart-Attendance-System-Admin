@@ -27,6 +27,7 @@ class LoginScreen extends StatelessWidget {
               shadowColor: Colors.black45,
               child: LayoutBuilder(builder: (context, constraints) {
                 final width = constraints.maxWidth;
+                final width = constraints.maxWidth;
                 final height = constraints.maxHeight;
 
                 return SizedBox(
@@ -86,13 +87,13 @@ class LoginScreen extends StatelessWidget {
                                 hintText: "Enter Password",
                               ),
                               SizedBox(
-                                height: height * 0.025,
+                                height: height * 0.012,
                               ),
                               Align(
                                   alignment: Alignment.centerRight,
                                   child: Text("Forgot Password")),
                               SizedBox(
-                                height: height * 0.02,
+                                height: height * 0.012,
                               ),
                               TextButton(
                                 style: TextButton.styleFrom(
@@ -108,7 +109,7 @@ class LoginScreen extends StatelessWidget {
                               SizedBox(
                                 height: 10,
                               ),
-                              Text("Or do you have an account sign up"),
+                              Text("Or do you have an account Sign up"),
                               SizedBox(
                                 height: 25,
                               ),
@@ -120,9 +121,11 @@ class LoginScreen extends StatelessWidget {
                                   ElevatedButton(
                                       style: IconButton.styleFrom(
                                         fixedSize: Size(120, 50),
-                                        elevation: 0,
+                                        elevation: 10,
+                                        shadowColor: Colors.black26,
                                         foregroundColor: Colors.black,
-                                        backgroundColor: Colors.white,
+                                        backgroundColor: const Color.fromARGB(
+                                            255, 255, 255, 255),
                                       ),
                                       onPressed: () {},
                                       child: Icon(
@@ -132,7 +135,8 @@ class LoginScreen extends StatelessWidget {
                                   ElevatedButton(
                                       style: IconButton.styleFrom(
                                         fixedSize: Size(120, 50),
-                                        elevation: 0,
+                                        elevation: 10,
+                                        shadowColor: Colors.black26,
                                         foregroundColor: Colors.black,
                                         backgroundColor: Colors.white,
                                       ),
@@ -144,7 +148,8 @@ class LoginScreen extends StatelessWidget {
                                   ElevatedButton(
                                       style: IconButton.styleFrom(
                                         fixedSize: Size(120, 50),
-                                        elevation: 0,
+                                        elevation: 10,
+                                        shadowColor: Colors.black26,
                                         foregroundColor: Colors.black,
                                         backgroundColor: Colors.white,
                                       ),
