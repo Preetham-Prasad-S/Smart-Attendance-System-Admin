@@ -26,14 +26,12 @@ class LoginScreen extends StatelessWidget {
               elevation: 100,
               shadowColor: Colors.black45,
               child: LayoutBuilder(builder: (context, constraints) {
-                final width = constraints.maxWidth > 1200
-                    ? constraints.maxWidth / 
-                    : constraints.maxWidth / 1.2;
+                final width = constraints.maxWidth;
                 final height = constraints.maxHeight;
 
                 return SizedBox(
-                  width: width * 0.6,
-                  height: height * 0.6,
+                  width: 450,
+                  height: 500,
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
@@ -67,8 +65,7 @@ class LoginScreen extends StatelessWidget {
                               Text(
                                 "Sign Up With Email",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.w900,
-                                    fontSize: width * 0.03),
+                                    fontWeight: FontWeight.w900, fontSize: 26),
                               ),
                               Text(
                                 textAlign: TextAlign.center,
@@ -77,32 +74,16 @@ class LoginScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w500),
                               ),
                               SizedBox(height: height * 0.02),
-                              TextFormField(
-                                decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: const Color.fromARGB(
-                                        172, 205, 219, 228),
-                                    constraints: BoxConstraints(
-                                        maxHeight: height * 0.045),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.transparent),
-                                        borderRadius:
-                                            BorderRadius.circular(10))),
+                              CustomTextField(
+                                prefixIcon: Ionicons.person_outline,
+                                height: height,
+                                hintText: "Enter Email",
                               ),
                               SizedBox(height: height * 0.025),
-                              TextFormField(
-                                decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: const Color.fromARGB(
-                                        172, 205, 219, 228),
-                                    constraints: BoxConstraints(
-                                        maxHeight: height * 0.045),
-                                    enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: Colors.transparent),
-                                        borderRadius:
-                                            BorderRadius.circular(10))),
+                              CustomTextField(
+                                prefixIcon: Ionicons.lock_closed_outline,
+                                height: height,
+                                hintText: "Enter Password",
                               ),
                               SizedBox(
                                 height: height * 0.025,
@@ -116,8 +97,8 @@ class LoginScreen extends StatelessWidget {
                               TextButton(
                                 style: TextButton.styleFrom(
                                     textStyle: GoogleFonts.quicksand(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: width * 0.03),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 20),
                                     foregroundColor: Colors.white,
                                     minimumSize: Size(double.infinity, 50),
                                     backgroundColor: Colors.black),
@@ -185,5 +166,41 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
         ));
+  }
+}
+
+class CustomTextField extends StatelessWidget {
+  final IconData prefixIcon;
+  final String hintText;
+  const CustomTextField(
+      {super.key,
+      required this.height,
+      required this.hintText,
+      required this.prefixIcon});
+
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      cursorRadius: Radius.circular(50),
+      cursorHeight: 18,
+      decoration: InputDecoration(
+          prefixIcon: Icon(
+            prefixIcon,
+            size: 18,
+          ),
+          hintText: hintText,
+          contentPadding: EdgeInsets.all(10),
+          filled: true,
+          fillColor: const Color.fromARGB(172, 205, 219, 228),
+          constraints: BoxConstraints(maxHeight: height * 0.045),
+          enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.transparent),
+              borderRadius: BorderRadius.circular(10)),
+          focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.transparent),
+              borderRadius: BorderRadius.circular(10))),
+    );
   }
 }
