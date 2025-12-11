@@ -1,69 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class AuthTextFieldWidget extends StatelessWidget {
-  final String label;
-  final IconData icon;
-  final bool obscureText;
+class CustomTextField extends StatelessWidget {
+  final IconData prefixIcon;
+  final String hintText;
   final TextEditingController controller;
-  final VoidCallback? onToggle;
-  final bool isPassword;
-  final String? Function(String?)? validator;
-
-  const AuthTextFieldWidget(
+  const CustomTextField(
       {super.key,
-      required this.label,
-      required this.icon,
-      required this.controller,
-      required this.validator,
-      this.onToggle,
-      this.obscureText = false,
-      this.isPassword = false});
+      required this.height,
+      required this.hintText,
+      required this.prefixIcon,
+      required this.controller});
+
+  final double height;
 
   @override
   Widget build(BuildContext context) {
-    OutlineInputBorder outlineInputBorder(Color color) => OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: color));
-    return Row(
-      children: [
-        Icon(
-          icon,
-          color: Colors.blue.shade900,
-        ),
-        SizedBox(width: 10),
-        Expanded(
-          child: TextFormField(
-            cursorColor: Colors.blue.shade800,
-            validator: validator,
-            controller: controller,
-            obscureText: obscureText,
-            decoration: InputDecoration(
-              suffixIcon: isPassword
-                  ? IconButton(
-                      onPressed: onToggle,
-                      icon: Icon(obscureText
-                          ? Icons.visibility_off
-                          : Icons.visibility),
-                      color: Colors.blue.shade800,
-                    )
-                  : null,
-              labelText: label,
-              errorStyle: TextStyle(color: Colors.red),
-              floatingLabelStyle: TextStyle(
-                  fontWeight: FontWeight.bold, color: Colors.blue.shade900),
-              labelStyle: TextStyle(
-                  color: const Color.fromARGB(122, 13, 72, 161),
-                  fontWeight: FontWeight.bold),
-              enabledBorder: outlineInputBorder(Colors.grey.shade300),
-              focusedBorder: outlineInputBorder(Colors.blue.shade900),
-              errorBorder: outlineInputBorder(Colors.red),
-              focusedErrorBorder: outlineInputBorder(Colors.red),
-              contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            ),
+    return TextFormField(
+      controller: controller,
+      validator: (value) {
+        if (value != null && !value.isEmpty) {
+          return "";
+        }
+        return "Please $hintText";
+      },
+      cursorRadius: Radius.circular(50),
+      cursorHeight: 18,
+      decoration: InputDecoration(
+          prefixIcon: Icon(
+            prefixIcon,
+            size: 18,
           ),
-        ),
-      ],
+          hintText: hintText,
+          hintStyle: GoogleFonts.quicksand(fontSize: 14),
+          contentPadding: EdgeInsets.all(10),
+          filled: true,
+          fillColor: const Color.fromARGB(172, 205, 219, 228),
+          constraints: BoxConstraints(maxHeight: height),
+          enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.transparent),
+              borderRadius: BorderRadius.circular(10)),
+          focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.transparent),
+              borderRadius: BorderRadius.circular(10))),
     );
   }
 }
